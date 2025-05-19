@@ -41,6 +41,19 @@ st.markdown("""
         color: #dc3545;
         font-weight: bold;
     }
+    .stButton > button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 24px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+    }
+    .stButton > button:hover {
+        background-color: #45a049;
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -61,8 +74,9 @@ with st.sidebar:
     
     **How to use:**
     1. Enter text in the input area
-    2. View the results in the tabs below
-    3. Download results as needed
+    2. Click the 'Process Text' button
+    3. View the results in the tabs below
+    4. Download results as needed
     """)
     
     st.markdown("### Settings")
@@ -70,7 +84,7 @@ with st.sidebar:
     highlight_color = st.color_picker("Highlight color", "#d1ffd1")
 
 # Main content area
-st.markdown("<h1 class='main-title'>DFA Word/Phrase Highlighter</h1>", unsafe_allow_html=True)
+st.markdown("<h1 class='main-title'>Place Name Detector</h1>", unsafe_allow_html=True)
 
 # Initialize DFA with progress indication
 with st.spinner("Loading DFA engine..."):
@@ -89,11 +103,15 @@ paragraph = st.text_area(
     placeholder="Type your paragraph here...",
 )
 
+# Add a "Process Text" button
+process_button = st.button("Process Text", key="process_button")
+
 # ---------------------------------------------------------------------- 
 #  Run DFA + show results 
 # ---------------------------------------------------------------------- 
-if paragraph.strip():
-    verdicts, bold_para = scan_paragraph(paragraph, dfa, MAX_LEN)
+if process_button and paragraph.strip():
+    with st.spinner("Processing text..."):
+        verdicts, bold_para = scan_paragraph(paragraph, dfa, MAX_LEN)
     
     # Update highlight color in the bold paragraph
     bold_para = bold_para.replace(
@@ -178,8 +196,10 @@ if paragraph.strip():
                 )
             except Exception as e:
                 st.warning(f"Excel export not available: {e}")
+elif process_button and not paragraph.strip():
+    st.warning("Please enter text before processing.")
 else:
-    st.info("Enter a paragraph above and results will appear instantly.")
+    st.info("Enter a paragraph above and click 'Process Text' to analyze.")
 
 st.markdown("</div>", unsafe_allow_html=True)
 
