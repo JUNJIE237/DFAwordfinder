@@ -81,7 +81,6 @@ with st.spinner("Loading DFA engine..."):
 # ---------------------------------------------------------------------- 
 #  UI – input area
 # ---------------------------------------------------------------------- 
-st.markdown("<div class='app-container'>", unsafe_allow_html=True)
 
 # Text input area - simplified, no columns needed
 paragraph = st.text_area(
