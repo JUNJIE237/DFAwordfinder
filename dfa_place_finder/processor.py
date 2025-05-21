@@ -46,7 +46,7 @@ def scan_paragraph(
     bold_paragraph  : the paragraph with accepted items **boldfaced**
                       (Markdown syntax, safe from nested bold)
     """
-    # ---- tokenise ----
+    # Tokenize the paragraphs
     tokens = [tok for word in paragraph.split() if (tok := strip_outer_punct(word))]
 
     verdicts: list[tuple[str, bool]] = []
@@ -73,11 +73,10 @@ def scan_paragraph(
                 accepted_set.add(tok)
             i += 1
 
-    # ---- build bold paragraph (placeholder trick avoids nested bold) ----
     placeholders: dict[str, str] = {}
     bold_para = paragraph
     for idx, phrase in enumerate(sorted(accepted_set, key=len, reverse=True)):
-        ph = f"\u0001{idx}\u0002"                 # control chars unlikely in text
+        ph = f"\u0001{idx}\u0002"
         placeholders[ph] = f'<span style="background-color: #d1ffd1; color: green; font-weight: bold; border-radius: 4px; padding: 2px 4px">{phrase}</span>'
         pattern = re.compile(rf"(?<!\w)({re.escape(phrase)})(?!\w)")
         bold_para = pattern.sub(ph, bold_para)
