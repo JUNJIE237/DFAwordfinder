@@ -54,7 +54,6 @@ class DFA:
         lines = [
             "digraph DFA {",
             "  rankdir=LR;",
-            # background color:
             "  graph [bgcolor=\"#131a2e\"];",
             "  node [shape=circle, style=filled, fillcolor=\"#103c69\", color=\"#2B65EC\", fontcolor=\"white\", fontname=\"Courier\"];"
             "  edge [fontcolor=\"#00f7ff\", color=\"#00f7ff\", fontname=\"Courier\"];"

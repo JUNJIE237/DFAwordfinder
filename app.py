@@ -58,7 +58,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ---------------------------------------------------------------------- 
-#  Build DFA once per session
+#  Build DFA for each session
 # ---------------------------------------------------------------------- 
 @st.cache_resource
 def _get_dfa():
