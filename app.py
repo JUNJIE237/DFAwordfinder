@@ -201,6 +201,10 @@ elif process_button and not paragraph.strip():
 else:
     st.info("Enter a paragraph above and click 'Process Text' to analyze.")
 
+# Visualize pre-built DFA
+dot_src = dfa.to_dot()
+st.graphviz_chart(dot_src)
+
 st.markdown("</div>", unsafe_allow_html=True)
 
 # Footer
