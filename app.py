@@ -2,7 +2,7 @@ import pandas as pd
 import streamlit as st
 import re
 import time
-from dfa_place_finder import build_dfa, scan_paragraph
+from dfa_place_finder import build_dfa, scan_paragraph, DFA
 
 # Page configuration
 st.set_page_config(
