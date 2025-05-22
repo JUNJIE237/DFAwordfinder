@@ -16,20 +16,14 @@ from .dfa import DFA
 from .phrases import ACCEPTED_PHRASES
 from .utils import strip_outer_punct, longest_phrase_len
 
-
-# ------------------------------------------------------------------ #
-#  (1) build_dfa  – called once, can be cached by Streamlit
-# ------------------------------------------------------------------ #
+#  build_dfa , used by Streamlit
 def build_dfa() -> tuple[DFA, int]:
     dfa = DFA()
     for phrase in ACCEPTED_PHRASES:
         dfa.insert(phrase)
     return dfa, longest_phrase_len(ACCEPTED_PHRASES)
 
-
-# ------------------------------------------------------------------ #
-#  (2) scan_paragraph
-# ------------------------------------------------------------------ #
+# scan_paragraph of the Streamlit app input
 def scan_paragraph(
     paragraph: str, dfa: DFA, paragraph_max_len: int
 ) -> tuple[List[Tuple[str, bool]], str]:

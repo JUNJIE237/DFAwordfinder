@@ -58,7 +58,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ---------------------------------------------------------------------- 
-#  Build DFA once per session
+#  Build DFA for each session
 # ---------------------------------------------------------------------- 
 @st.cache_resource
 def _get_dfa():
@@ -200,6 +200,10 @@ elif process_button and not paragraph.strip():
     st.warning("Please enter text before processing.")
 else:
     st.info("Enter a paragraph above and click 'Process Text' to analyze.")
+
+# Visualize pre-built DFA
+dot_src = dfa.to_dot()
+st.graphviz_chart(dot_src)
 
 st.markdown("</div>", unsafe_allow_html=True)
 
